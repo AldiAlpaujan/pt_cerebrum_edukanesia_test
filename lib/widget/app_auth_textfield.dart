@@ -8,6 +8,7 @@ class AppAuthTextField extends StatefulWidget {
   final String label;
   final String hintText;
   final bool obscureText;
+  final bool numberOnly;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
@@ -16,6 +17,7 @@ class AppAuthTextField extends StatefulWidget {
     required this.label,
     required this.hintText,
     this.obscureText = false,
+    this.numberOnly = false,
     this.controller,
     this.keyboardType,
     this.validator,
@@ -29,7 +31,7 @@ class _AppAuthTextFieldState extends State<AppAuthTextField> {
   final focusNode = FocusNode();
   final isFocused = false.obs;
   final obscureText = false.obs;
-
+  final isError = false.obs;
   @override
   void initState() {
     obscureText.value = widget.obscureText;
@@ -50,8 +52,11 @@ class _AppAuthTextFieldState extends State<AppAuthTextField> {
             widget.label,
             style: TextStyle(
               fontSize: 14,
-              color:
-                  isFocused.value ? AppTheme.primaryColor : AppTheme.titleColor,
+              color: isError.value
+                  ? Colors.red // Color changes to red if error exists
+                  : (isFocused.value
+                      ? AppTheme.primaryColor
+                      : AppTheme.titleColor),
             ),
           ),
         ),
@@ -60,8 +65,16 @@ class _AppAuthTextFieldState extends State<AppAuthTextField> {
             focusNode: focusNode,
             obscureText: obscureText.value,
             controller: widget.controller,
-            textInputAction: TextInputAction.next,
-            validator: widget.validator,
+            validator: (value) {
+              String? validationResult = widget.validator?.call(value);
+              isError.value =
+                  validationResult != null && validationResult.isNotEmpty;
+              return validationResult;
+            },
+            keyboardType: widget.numberOnly ? TextInputType.number : null,
+            inputFormatters: [
+              if (widget.numberOnly) FilteringTextInputFormatter.digitsOnly
+            ],
             decoration: InputDecoration(
               isDense: true,
               border: const UnderlineInputBorder(
@@ -76,6 +89,12 @@ class _AppAuthTextFieldState extends State<AppAuthTextField> {
               ),
               enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFFE9E9E9)),
+              ),
+              errorBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+              ),
+              focusedErrorBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 0.6),
               ),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 12,

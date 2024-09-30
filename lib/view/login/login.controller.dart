@@ -1,11 +1,19 @@
+import 'package:aldi_test/routes/app_pages.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  final emailC = TextEditingController();
-  final pwC = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final emailC = TextEditingController(text: "aldi@gmail.com");
+  final pwC = TextEditingController(text: "aldi");
 
-  login() async {}
+  login() async {
+    if (formKey.currentState!.validate()) {
+      Get.toNamed(Routes.navigation);
+    }
+  }
 
-  register() async {}
+  register() async {
+    Get.toNamed(Routes.register);
+  }
 }
