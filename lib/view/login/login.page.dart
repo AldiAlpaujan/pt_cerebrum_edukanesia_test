@@ -84,9 +84,12 @@ class LoginPage extends GetView<LoginController> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
-                    child: AppButton(
-                      onTap: controller.login,
-                      child: const Text("Login", style: AppTheme.btnStyle),
+                    child: Obx(
+                      () => AppButton(
+                        onTap: controller.login,
+                        isLoading: controller.btnLoading,
+                        child: const Text("Login", style: AppTheme.btnStyle),
+                      ),
                     ),
                   ),
                   Center(

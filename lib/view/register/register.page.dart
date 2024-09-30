@@ -87,6 +87,7 @@ class RegisterPage extends GetView<RegisterController> {
                       label: "No. Telepon",
                       hintText: "Masukan no telepon",
                       controller: controller.phoneC,
+                      numberOnly: true,
                       validator: (v) => emptyValidator("No. Telepon", v!),
                     ),
                   ),
@@ -102,9 +103,12 @@ class RegisterPage extends GetView<RegisterController> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
-                    child: AppButton(
-                      onTap: controller.register,
-                      child: const Text("Register", style: AppTheme.btnStyle),
+                    child: Obx(
+                      () => AppButton(
+                        onTap: controller.register,
+                        isLoading: controller.btnLoading,
+                        child: const Text("Register", style: AppTheme.btnStyle),
+                      ),
                     ),
                   ),
                   Center(

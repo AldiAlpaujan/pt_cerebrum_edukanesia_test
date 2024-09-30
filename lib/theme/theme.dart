@@ -14,6 +14,15 @@ class AppTheme {
 
   static const padding = 16.0;
 
+  static const titleDialogStyle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const contentDialogStyle = TextStyle(fontSize: 14);
+
+  static const contentPaddingDialog = EdgeInsets.fromLTRB(24, 12, 24, 8);
+
   static const localizationsDelegates = [
     GlobalWidgetsLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,

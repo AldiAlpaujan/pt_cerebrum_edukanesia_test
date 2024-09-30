@@ -1,9 +1,12 @@
 import 'package:aldi_test/routes/app_pages.dart';
+import 'package:aldi_test/services/sql/sql_service.dart';
 import 'package:aldi_test/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SqlService.initialize();
   runApp(const MyApp());
 }
 

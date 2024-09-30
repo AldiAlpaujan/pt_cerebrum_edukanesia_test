@@ -1,4 +1,6 @@
+import 'package:aldi_test/helper/global_var.dart';
 import 'package:aldi_test/routes/app_pages.dart';
+import 'package:aldi_test/services/shared/shared_pref.dart';
 import 'package:aldi_test/widget/app_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,8 +14,8 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   initialize() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    Get.toNamed(Routes.login);
+    await SharedPref.loadUser();
+    Get.toNamed(user == null ? Routes.login : Routes.navigation);
   }
 
   @override
