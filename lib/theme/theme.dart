@@ -4,11 +4,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 class AppTheme {
   static const fontFamily = "Barlow";
   static const primaryColor = Color(0xFF6AB058);
-  static const bgColor = Color(0xFFF9F9F9);
+  static const bgColor = Color(0xFFFFFFFF);
   static const shadowColor = Color(0x18000000);
   static const titleColor = Color(0xFF4F4F4F);
   static const bodyColor = Color(0xFF4F4F4F);
   static const capColor = Color(0xFFA2A2A2);
+  static const borderColor = Color(0xFFEEF2F8);
 
   static const textFieldBorderColor = Color(0xFFD5D8E2);
 

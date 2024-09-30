@@ -5,4 +5,5 @@ class Routes {
   static const login = '/login';
   static const register = '/register';
   static const navigation = '/navigation';
+  static const productForm = '/product/form';
 }

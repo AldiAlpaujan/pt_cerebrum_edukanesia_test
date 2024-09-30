@@ -8,9 +8,9 @@ class SharedPref {
   // USER
   static loadUser() async {
     final sp = await SharedPreferences.getInstance();
-    final id = sp.getInt(_keyUserId)!;
+    final id = sp.getInt(_keyUserId) ?? 0;
     final usrFromDB = await UserData.getData(id);
-    user = usrFromDB!;
+    user = usrFromDB;
   }
 
   static setUserID(int userID) async {

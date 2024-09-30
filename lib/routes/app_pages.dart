@@ -4,6 +4,8 @@ import 'package:aldi_test/view/login/login.page.dart';
 import 'package:aldi_test/view/navigation/navigation.controller.dart';
 import 'package:aldi_test/view/navigation/navigation.page.dart';
 import 'package:aldi_test/view/product/product.controller.dart';
+import 'package:aldi_test/view/product/product.controller.form.dart';
+import 'package:aldi_test/view/product/product.page.form.dart';
 import 'package:aldi_test/view/profile/profile.controller.dart';
 import 'package:aldi_test/view/register/register.controller.dart';
 import 'package:aldi_test/view/register/register.page.dart';
@@ -41,6 +43,13 @@ class AppPages {
         BindingsBuilder(() => Get.lazyPut(() => SaleController())),
         BindingsBuilder(() => Get.lazyPut(() => ProfileController())),
       ],
+    ),
+    GetPage(
+      name: Routes.productForm,
+      page: () => const ProductFormPage(),
+      binding: BindingsBuilder(
+        () => Get.lazyPut(() => ProductFormController()),
+      ),
     ),
   ];
 }

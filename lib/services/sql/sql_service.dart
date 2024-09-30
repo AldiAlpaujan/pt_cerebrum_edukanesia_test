@@ -32,6 +32,7 @@ class SqlService {
     var database = await getDatabase();
     await database.transaction((txn) async {
       await txn.execute(SqlQuery.craeteTBUser);
+      await txn.execute(SqlQuery.createTBProduct);
     });
   }
 
