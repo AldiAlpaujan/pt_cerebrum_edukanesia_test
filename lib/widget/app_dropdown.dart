@@ -1,6 +1,5 @@
 import 'package:aldi_test/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AppDropDown extends StatelessWidget {
   final String? label;
@@ -56,8 +55,8 @@ class AppDropDown extends StatelessWidget {
               fontSize: 14,
               fontFamily: AppTheme.fontFamily,
             ),
-            icon: Icon(
-              MdiIcons.chevronDown,
+            icon: const Icon(
+              Icons.expand_more_rounded,
               color: AppTheme.capColor,
             ),
             onChanged: onChanged,

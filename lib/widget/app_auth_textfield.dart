@@ -2,7 +2,6 @@ import 'package:aldi_test/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AppAuthTextField extends StatefulWidget {
   final String label;
@@ -110,8 +109,8 @@ class _AppAuthTextFieldState extends State<AppAuthTextField> {
                       onPressed: () => obscureText.value = !obscureText.value,
                       icon: Icon(
                         obscureText.value
-                            ? MdiIcons.eyeOffOutline
-                            : MdiIcons.eyeOutline,
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility,
                         color: const Color(0xFFBDBDBD),
                       ),
                     )

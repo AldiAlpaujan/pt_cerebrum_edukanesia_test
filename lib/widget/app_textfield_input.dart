@@ -4,7 +4,6 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AppTextFieldInput extends StatefulWidget {
   final String? label;
@@ -176,7 +175,7 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
       () => IconButton(
         onPressed: () => hide.value = !hide.value,
         icon: Icon(
-          hide.value ? MdiIcons.eyeOffOutline : MdiIcons.eyeOutline,
+          hide.value ? Icons.visibility_off_outlined : Icons.visibility,
           color: hasfocus.value ? AppTheme.primaryColor : AppTheme.capColor,
         ),
       ),

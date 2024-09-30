@@ -1,9 +1,13 @@
+import 'package:aldi_test/view/dashboard/dashboard.controller.dart';
 import 'package:aldi_test/view/login/login.controller.dart';
 import 'package:aldi_test/view/login/login.page.dart';
 import 'package:aldi_test/view/navigation/navigation.controller.dart';
 import 'package:aldi_test/view/navigation/navigation.page.dart';
+import 'package:aldi_test/view/product/product.controller.dart';
+import 'package:aldi_test/view/profile/profile.controller.dart';
 import 'package:aldi_test/view/register/register.controller.dart';
 import 'package:aldi_test/view/register/register.page.dart';
+import 'package:aldi_test/view/sale/sale.controller.dart';
 import 'package:aldi_test/view/splash_screen/splash_screen.page.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +34,13 @@ class AppPages {
     GetPage(
       name: Routes.navigation,
       page: () => const NavigationPage(),
-      binding: BindingsBuilder(() => Get.lazyPut(() => NavigationController())),
+      bindings: [
+        BindingsBuilder(() => Get.lazyPut(() => NavigationController())),
+        BindingsBuilder(() => Get.lazyPut(() => DashboardController())),
+        BindingsBuilder(() => Get.lazyPut(() => ProductController())),
+        BindingsBuilder(() => Get.lazyPut(() => SaleController())),
+        BindingsBuilder(() => Get.lazyPut(() => ProfileController())),
+      ],
     ),
   ];
 }
