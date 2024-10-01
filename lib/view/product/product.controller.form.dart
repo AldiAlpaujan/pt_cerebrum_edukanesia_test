@@ -2,6 +2,7 @@ import 'package:aldi_test/data/product.data.dart';
 import 'package:aldi_test/enum/form_type.dart';
 import 'package:aldi_test/enum/product_availability.dart';
 import 'package:aldi_test/helper/dialog.dart';
+import 'package:aldi_test/helper/formatter.dart';
 import 'package:aldi_test/model/product.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -64,14 +65,19 @@ class ProductFormController extends GetxController {
     }
   }
 
-  onProductDelete() async {
-    waitingDialog();
-    final result = await ProductData.delete(_arg!.id!);
-    Get.back();
-    if (result) {
-      Get.back();
-      info(message: "Product berhasil dihapus!");
-    }
+  onProductDelete() {
+    confirm(
+      message: "Apakah anda yakin ingin menghapus produk ini?",
+      onOk: () async {
+        waitingDialog();
+        final result = await ProductData.delete(_arg!.id!);
+        Get.back();
+        if (result) {
+          Get.back();
+          info(message: "Product berhasil dihapus!");
+        }
+      },
+    );
   }
 
   @override
@@ -80,7 +86,7 @@ class ProductFormController extends GetxController {
       formType = FormType.edit;
       price = _arg.price;
       nameC.text = _arg.name;
-      priceC.text = _arg.price.toString();
+      priceC.text = moneyFormatter(_arg.price);
       categoryC.text = _arg.category;
       descC.text = _arg.description ?? "";
       productAvilable = _arg.availability;

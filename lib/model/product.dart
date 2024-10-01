@@ -1,12 +1,15 @@
 import 'package:aldi_test/helper/global_var.dart';
+import 'package:aldi_test/interface/iname.dart';
 
-class Product {
+class Product extends IName {
   final int? id;
   final String name;
   final double price;
   final String category;
   final String? description;
   final bool availability;
+
+  String get initial => getInitialName(name);
 
   Product({
     this.id,

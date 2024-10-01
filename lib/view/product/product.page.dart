@@ -1,4 +1,5 @@
 import 'package:aldi_test/view/product/product.controller.dart';
+import 'package:aldi_test/view/product/widget/app_product_card.dart';
 import 'package:aldi_test/widget/app_404.dart';
 import 'package:aldi_test/widget/app_bar_search.dart';
 import 'package:aldi_test/widget/app_loading.dart';
@@ -31,9 +32,18 @@ class ProductPage extends GetView<ProductController> {
               const AppLoading()
             else
               RefreshIndicator(
-                onRefresh: () async => controller.getData(),
+                onRefresh: () async => controller.getData(withLoading: false),
                 child: ListView(
-                  children: const [],
+                  children: controller
+                      .products()
+                      .map(
+                        (e) => AppProductCard(
+                          product: e,
+                          onTap: (v) => controller.formPage(product: v),
+                          isLast: e.id == controller.products().last.id,
+                        ),
+                      )
+                      .toList(),
                 ),
               )
           ],

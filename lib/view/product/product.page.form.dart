@@ -24,7 +24,10 @@ class ProductFormPage extends GetView<ProductFormController> {
             () => controller.formType.isEdit
                 ? IconButton(
                     onPressed: controller.onProductDelete,
-                    icon: const Icon(Icons.delete_outline_rounded),
+                    icon: const Icon(
+                      Icons.delete_outline_rounded,
+                      color: Colors.red,
+                    ),
                   )
                 : const SizedBox(),
           )

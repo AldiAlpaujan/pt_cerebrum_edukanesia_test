@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Pontren",
+      title: "Aldi Test",
       getPages: AppPages.pages,
       initialRoute: AppPages.initial,
       debugShowCheckedModeBanner: false,

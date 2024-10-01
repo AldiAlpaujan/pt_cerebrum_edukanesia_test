@@ -11,8 +11,8 @@ class ProductController extends GetxController {
   bool get loading => _loading.value;
   set loading(bool value) => _loading.value = value;
 
-  getData({String keyword = ''}) async {
-    loading = true;
+  getData({String keyword = '', bool withLoading = true}) async {
+    loading = withLoading;
     products.value = await ProductData.get(name: keyword);
     loading = false;
   }
