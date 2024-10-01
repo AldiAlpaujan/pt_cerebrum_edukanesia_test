@@ -1,13 +1,15 @@
+import 'package:aldi_test/helper/global_var.dart';
+
 class Product {
-  final int id;
+  final int? id;
   final String name;
   final double price;
   final String category;
-  final String description;
+  final String? description;
   final bool availability;
 
   Product({
-    required this.id,
+    this.id,
     required this.name,
     required this.price,
     required this.category,
@@ -22,18 +24,18 @@ class Product {
       price: db['price'],
       category: db['category'],
       description: db['description'],
-      availability: db['availability'],
+      availability: db['availability'] == 0 ? false : true,
     );
   }
 
   Map<String, dynamic> toDB() {
     return {
-      'id': id,
       'name': name,
       'price': price,
       'category': category,
-      'description': description,
-      'availability': availability,
+      'description': description == "" ? null : description,
+      'availability': availability ? 1 : 0,
+      'user_id': user!.id,
     };
   }
 }

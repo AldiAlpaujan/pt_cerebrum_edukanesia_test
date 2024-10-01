@@ -60,7 +60,7 @@ class AppDropDown extends StatelessWidget {
               color: AppTheme.capColor,
             ),
             onChanged: onChanged,
-            alignment: Alignment.bottomLeft,
+            alignment: Alignment.center,
             padding: EdgeInsets.zero,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: AppTheme.textFieldInputDecoration.copyWith(
@@ -73,7 +73,7 @@ class AppDropDown extends StatelessWidget {
             selectedItemBuilder: (BuildContext context) {
               return items.map<Widget>((String item) {
                 return Container(
-                  alignment: Alignment.bottomLeft,
+                  alignment: Alignment.centerLeft,
                   constraints: const BoxConstraints(minWidth: 100),
                   child: Text(
                     item,

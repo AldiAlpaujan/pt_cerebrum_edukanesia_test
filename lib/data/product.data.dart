@@ -47,17 +47,7 @@ class ProductData {
       return false;
     }
 
-    final id = await SqlService.create(
-      SqlHelper.tbProduct,
-      {
-        'name': product.name,
-        'price': product.price,
-        'category': product.category,
-        'description': product.description,
-        'availability': product.availability,
-        'user_id': user!.id,
-      },
-    );
+    final id = await SqlService.create(SqlHelper.tbProduct, product.toDB());
     return id != null;
   }
 
@@ -77,13 +67,7 @@ class ProductData {
 
     final result = await SqlService.update(
       SqlHelper.tbProduct,
-      {
-        'name': product.name,
-        'price': product.price,
-        'category': product.category,
-        'description': product.description,
-        'availability': product.availability,
-      },
+      product.toDB(),
       where: 'user_id = ? AND id = ?',
       whereArgs: [user!.id, product.id],
     );

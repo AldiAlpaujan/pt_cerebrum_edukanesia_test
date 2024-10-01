@@ -17,8 +17,9 @@ class ProductController extends GetxController {
     loading = false;
   }
 
-  formPage({Product? product}) {
-    Get.toNamed(Routes.productForm, arguments: product);
+  formPage({Product? product}) async {
+    await Get.toNamed(Routes.productForm, arguments: product);
+    getData();
   }
 
   onChanged(String value) {
