@@ -2,6 +2,7 @@ import 'package:aldi_test/data/sale.data.dart';
 import 'package:aldi_test/helper/function.dart';
 import 'package:aldi_test/model/sale.dart';
 import 'package:aldi_test/routes/app_pages.dart';
+import 'package:aldi_test/view/sale/sale.page.detail.dart';
 import 'package:get/get.dart';
 
 class SaleController extends GetxController {
@@ -18,7 +19,8 @@ class SaleController extends GetxController {
   }
 
   detailPage(Sale sale) async {
-    // await Get.toNamed(Routes.saleForm);
+    await SaleDetailPage.open(sale);
+    getData();
   }
 
   formPage() async {

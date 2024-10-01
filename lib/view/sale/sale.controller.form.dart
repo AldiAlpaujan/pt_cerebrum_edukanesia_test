@@ -2,14 +2,18 @@ import 'package:aldi_test/data/product.data.dart';
 import 'package:aldi_test/data/sale.data.dart';
 import 'package:aldi_test/enum/form_type.dart';
 import 'package:aldi_test/helper/dialog.dart';
+import 'package:aldi_test/helper/formatter.dart';
 import 'package:aldi_test/helper/function.dart';
 import 'package:aldi_test/model/product.cart.dart';
 import 'package:aldi_test/model/product.dart';
+import 'package:aldi_test/model/sale.dart';
 import 'package:aldi_test/view/sale/sale.page.cart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SaleFormController extends GetxController {
+  final _arg = Get.arguments as Sale?;
+
   var pay = 0.0;
 
   final _loading = false.obs;
@@ -48,11 +52,25 @@ class SaleFormController extends GetxController {
         Get.back();
         if (result) {
           Get.back();
-          customerC.clear();
+          customerC.text = 'Pelanggan Umum';
           payC.clear();
           pay = 0.0;
           productOnCarts.clear();
           info(message: "Penjualan berhasil ditambahkan");
+        }
+      } else {
+        waitingDialog();
+        final result = await SaleData.update(
+          id: _arg!.id,
+          customer: customerC.text,
+          payment: pay,
+          productCarts: productOnCarts,
+        );
+        Get.back();
+        if (result) {
+          Get.back();
+          Get.back();
+          info(message: "Penjualan berhasil diubah");
         }
       }
     }
@@ -128,6 +146,13 @@ class SaleFormController extends GetxController {
   @override
   void onInit() {
     getData();
+    if (_arg != null) {
+      formType = FormType.edit;
+      customerC.text = _arg.customer;
+      payC.text = moneyFormatter(_arg.payment);
+      pay = _arg.payment;
+      productOnCarts.value = _arg.products;
+    }
     super.onInit();
   }
 }

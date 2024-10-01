@@ -1,4 +1,5 @@
 import 'package:aldi_test/helper/formatter.dart';
+import 'package:aldi_test/model/product.cart.dart';
 import 'package:aldi_test/model/product.dart';
 import 'package:aldi_test/theme/theme.dart';
 import 'package:aldi_test/widget/app_card_list.dart';
@@ -8,12 +9,14 @@ import 'package:flutter/widgets.dart';
 class AppProductCard extends StatelessWidget {
   final Product product;
   final bool isLast;
+  final bool withPadding;
   final Function(Product) onTap;
   const AppProductCard({
     super.key,
     required this.product,
     required this.onTap,
     required this.isLast,
+    this.withPadding = true,
   });
 
   @override
@@ -23,7 +26,9 @@ class AppProductCard extends StatelessWidget {
       child: AppCardList(
         isLast: isLast,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppTheme.padding),
+          padding: EdgeInsets.symmetric(
+            horizontal: withPadding ? AppTheme.padding : 0,
+          ),
           child: Row(
             children: [
               AppSquareInitial(initial: product.initial),
@@ -50,14 +55,35 @@ class AppProductCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 3),
-                    Text(
-                      "Kategori : ${product.category}",
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: AppTheme.capColor,
+                    const SizedBox(height: 4),
+                    if (product is ProductCart)
+                      Row(
+                        children: [
+                          Text(
+                            "Kategori : ${product.category}",
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppTheme.capColor,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            "x ${(product as ProductCart).qty}",
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppTheme.capColor,
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      Text(
+                        "Kategori : ${product.category}",
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppTheme.capColor,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               )

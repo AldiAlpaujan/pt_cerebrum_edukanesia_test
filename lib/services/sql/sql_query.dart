@@ -40,7 +40,7 @@ class SqlQuery {
       product_id INTEGER NOT NULL,
       sale_id INTEGER NOT NULL,
       FOREIGN KEY (product_id) REFERENCES ${SqlHelper.tbProduct}(id),
-      FOREIGN KEY (sale_id) REFERENCES ${SqlHelper.tbSale}(id)
+      FOREIGN KEY (sale_id) REFERENCES ${SqlHelper.tbSale}(id) ON DELETE CASCADE
     )
   """;
 }

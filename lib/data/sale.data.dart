@@ -38,6 +38,22 @@ class SaleData {
   }
 
   static Future<Sale?> getSingle(int id) async {
+    final saleResults = await SqlService.getData(
+      SqlHelper.tbSale,
+      where: 'user_id = ? AND id = ?',
+      whereArgs: [user!.id, id],
+    );
+    if (saleResults.isNotEmpty) {
+      final productResults = await SqlService.rawQuery("""
+        select * from ${SqlHelper.tbProductSale} 
+        inner join ${SqlHelper.tbProduct} on ${SqlHelper.tbProduct}.id = ${SqlHelper.tbProductSale}.product_id 
+        where sale_id = ${saleResults.first['id']}
+      """);
+      return Sale.fromJson({
+        ...saleResults.first,
+        'products': productResults,
+      });
+    }
     return null;
   }
 
@@ -68,11 +84,46 @@ class SaleData {
     return result;
   }
 
-  static Future<bool> update() async {
-    return false;
+  static Future<bool> update({
+    required int id,
+    required String customer,
+    required double payment,
+    required List<ProductCart> productCarts,
+  }) async {
+    final result = await SqlService.dbTransaction((trx) async {
+      await trx.update(
+        SqlHelper.tbSale,
+        {
+          'user_id': user!.id,
+          'payment': payment,
+          'customer': customer,
+          'update_at': DateTime.now().toIso8601String(),
+        },
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      await trx.delete(
+        SqlHelper.tbProductSale,
+        where: 'sale_id = ?',
+        whereArgs: [id],
+      );
+      for (var element in productCarts) {
+        await trx.insert(SqlHelper.tbProductSale, {
+          'sale_id': id,
+          'product_id': element.id,
+          'qty': element.qty,
+        });
+      }
+    });
+    return result;
   }
 
-  static Future<bool> delete() async {
-    return false;
+  static Future<bool> delete(int id) async {
+    final result = await SqlService.delete(
+      SqlHelper.tbSale,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return result;
   }
 }
