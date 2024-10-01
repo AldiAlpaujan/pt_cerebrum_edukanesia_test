@@ -1,4 +1,6 @@
 import 'package:aldi_test/data/product.data.dart';
+import 'package:aldi_test/data/sale.data.dart';
+import 'package:aldi_test/enum/form_type.dart';
 import 'package:aldi_test/helper/dialog.dart';
 import 'package:aldi_test/helper/function.dart';
 import 'package:aldi_test/model/product.cart.dart';
@@ -11,8 +13,9 @@ class SaleFormController extends GetxController {
   var pay = 0.0;
 
   final _loading = false.obs;
+  final _formType = FormType.add.obs;
 
-  final customerC = TextEditingController();
+  final customerC = TextEditingController(text: 'Pelanggan Umum');
   final totalC = TextEditingController();
   final payC = TextEditingController();
 
@@ -21,6 +24,9 @@ class SaleFormController extends GetxController {
 
   bool get loading => _loading.value;
   set loading(bool value) => _loading.value = value;
+
+  FormType get formType => _formType.value;
+  set formType(FormType value) => _formType.value = value;
 
   double get totalCart {
     double total = 0;
@@ -31,7 +37,25 @@ class SaleFormController extends GetxController {
   }
 
   onSubmit() async {
-    if (_validationOnSubmit()) {}
+    if (_validationOnSubmit()) {
+      if (formType == FormType.add) {
+        waitingDialog();
+        final result = await SaleData.create(
+          customer: customerC.text,
+          payment: pay,
+          productCarts: productOnCarts,
+        );
+        Get.back();
+        if (result) {
+          Get.back();
+          customerC.clear();
+          payC.clear();
+          pay = 0.0;
+          productOnCarts.clear();
+          info(message: "Penjualan berhasil ditambahkan");
+        }
+      }
+    }
   }
 
   bool _validationOnSubmit() {

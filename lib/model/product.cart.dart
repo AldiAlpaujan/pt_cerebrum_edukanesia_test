@@ -24,4 +24,16 @@ class ProductCart extends Product {
       qty: qty,
     );
   }
+
+  factory ProductCart.fromDB(Map<String, dynamic> row) {
+    return ProductCart(
+      id: row['id'],
+      name: row['name'],
+      price: row['price'],
+      category: row['category'],
+      description: row['description'],
+      availability: row['availability'] == 1,
+      qty: row['qty'],
+    );
+  }
 }

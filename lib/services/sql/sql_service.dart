@@ -33,6 +33,8 @@ class SqlService {
     await database.transaction((txn) async {
       await txn.execute(SqlQuery.craeteTBUser);
       await txn.execute(SqlQuery.createTBProduct);
+      await txn.execute(SqlQuery.createTBSale);
+      await txn.execute(SqlQuery.createTBProductSale);
     });
   }
 
