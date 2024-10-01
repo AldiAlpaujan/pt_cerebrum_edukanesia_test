@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
+  static NavigationController get instance => Get.find<NavigationController>();
   final current = 0.obs;
   final pages = <Map<String, dynamic>>[
     {
@@ -22,11 +23,6 @@ class NavigationController extends GetxController {
       'title': 'Penjualan',
       "page": const SalePage(),
     },
-    // {
-    //   'icon': Icons.person_rounded,
-    //   'title': 'Profile',
-    //   "page": const ProfilePage(),
-    // },
   ];
 
   Widget get page => pages[current.value]["page"];
