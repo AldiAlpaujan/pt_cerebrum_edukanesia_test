@@ -1,7 +1,7 @@
-// user
 import 'package:aldi_test/model/user.dart';
 import 'package:get/get.dart';
 
+// user
 final _user = Rx<User?>(null);
 
 User? get user => _user.value;

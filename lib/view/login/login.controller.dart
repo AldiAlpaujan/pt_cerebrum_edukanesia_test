@@ -23,7 +23,7 @@ class LoginController extends GetxController {
       if (result != null) {
         user = result;
         await SharedPref.setUserID(result.id);
-        Get.toNamed(Routes.navigation);
+        Get.offAllNamed(Routes.navigation);
       }
     }
   }

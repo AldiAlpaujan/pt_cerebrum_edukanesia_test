@@ -7,8 +7,8 @@ class UserData {
   static Future<User?> login(String email, String password) async {
     final result = await SqlService.getData(
       SqlHelper.tbUser,
-      where: 'email = ? AND pw = ?',
-      whereArgs: [email, password],
+      where: 'lower(email) = ? AND pw = ?',
+      whereArgs: [email.toLowerCase(), password],
     );
     if (result.isEmpty) {
       info(
