@@ -3,7 +3,8 @@ import 'package:flutter/widgets.dart';
 
 class AppSquareInitial extends StatelessWidget {
   final String initial;
-  const AppSquareInitial({super.key, required this.initial});
+  final Color? bgColor;
+  const AppSquareInitial({super.key, required this.initial, this.bgColor});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class AppSquareInitial extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: AppTheme.primaryColor.withOpacity(.1),
+        color: bgColor ?? AppTheme.primaryColor.withOpacity(.1),
       ),
       child: Text(
         initial,

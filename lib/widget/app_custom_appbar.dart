@@ -1,4 +1,5 @@
 import 'package:aldi_test/theme/theme.dart';
+import 'package:aldi_test/widget/app_back_button.dart';
 import 'package:flutter/material.dart';
 
 class AppCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -23,9 +24,7 @@ class AppCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: showLeading
-            ? const BackButton(color: Colors.black)
-            : const SizedBox(),
+        leading: showLeading ? const AppBackButton() : const SizedBox(),
         leadingWidth: showLeading ? null : 0,
         title: Padding(
           padding: EdgeInsets.only(left: !showLeading ? AppTheme.padding : 0),

@@ -8,6 +8,10 @@ class SalePage extends GetView<SaleController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.formPage,
+        child: const Icon(Icons.add_rounded),
+      ),
       body: Container(),
     );
   }

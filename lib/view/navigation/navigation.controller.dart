@@ -1,6 +1,5 @@
 import 'package:aldi_test/view/dashboard/dashboard.page.dart';
 import 'package:aldi_test/view/product/product.page.dart';
-import 'package:aldi_test/view/profile/profile.page.dart';
 import 'package:aldi_test/view/sale/sale.page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,11 +22,11 @@ class NavigationController extends GetxController {
       'title': 'Penjualan',
       "page": const SalePage(),
     },
-    {
-      'icon': Icons.person_rounded,
-      'title': 'Profile',
-      "page": const ProfilePage(),
-    },
+    // {
+    //   'icon': Icons.person_rounded,
+    //   'title': 'Profile',
+    //   "page": const ProfilePage(),
+    // },
   ];
 
   Widget get page => pages[current.value]["page"];

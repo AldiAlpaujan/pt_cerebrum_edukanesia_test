@@ -62,7 +62,7 @@ class AppTheme {
   );
 
   static final _borderTextFieldInput = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(8),
+    borderRadius: BorderRadius.circular(4),
     borderSide: const BorderSide(
       color: AppTheme.textFieldBorderColor,
       width: 1,

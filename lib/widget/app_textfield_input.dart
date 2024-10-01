@@ -157,7 +157,7 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
                   hintStyle: const TextStyle(
                     color: AppTheme.capColor,
                     fontWeight: FontWeight.w400,
-                    fontSize: 14,
+                    fontSize: 13,
                   ),
                   prefixIcon: widget.preffixIcon,
                   suffixIcon:

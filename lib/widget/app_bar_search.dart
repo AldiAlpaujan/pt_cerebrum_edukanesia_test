@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 import 'package:aldi_test/theme/theme.dart';
+import 'package:aldi_test/widget/app_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -70,7 +71,8 @@ class _AppBarSearchState extends State<AppBarSearch> {
           child: AppBar(
             elevation: 0,
             backgroundColor: Colors.white,
-            leading: widget.withLeading ? null : const SizedBox(),
+            leading:
+                widget.withLeading ? const AppBackButton() : const SizedBox(),
             leadingWidth: widget.withLeading ? null : 0,
             title: Padding(
               padding: EdgeInsets.only(
