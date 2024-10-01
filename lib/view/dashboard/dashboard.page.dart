@@ -10,6 +10,7 @@ import 'package:aldi_test/widget/app_square_initial.dart';
 import 'package:aldi_test/widget/app_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class DashboardPage extends GetView<DashboardController> {
   const DashboardPage({super.key});
@@ -80,7 +81,80 @@ class DashboardPage extends GetView<DashboardController> {
   }
 
   Widget weather() {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Obx(
+        () => summaryCard(
+          title: "Ramalan Cuaca",
+          onSeeAll: null,
+          isLoading: controller.weatherLoading,
+          notFound: controller.weathers.isEmpty,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16.0, bottom: 16),
+            child: Row(
+              children: [
+                ...controller.weathers.map(
+                  (e) => Expanded(
+                    child: Column(
+                      children: [
+                        Icon(_getIcon(e['code']), size: 40),
+                        const SizedBox(height: 10),
+                        Text(
+                          e['id'] == 1 ? "Hari ini" : "Besok",
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: AppTheme.capColor,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          e['weatherDescription'].toString().capitalize!,
+                          style: const TextStyle(
+                            color: AppTheme.titleColor,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          "${e['temperature']}°C",
+                          style: const TextStyle(
+                            color: AppTheme.titleColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  IconData _getIcon(int condition) {
+    if (condition < 300) {
+      return WeatherIcons.thunderstorm;
+    } else if (condition < 400) {
+      return WeatherIcons.sprinkle;
+    } else if (condition < 600) {
+      return WeatherIcons.rain;
+    } else if (condition < 700) {
+      return WeatherIcons.snow;
+    } else if (condition < 800) {
+      return WeatherIcons.fog;
+    } else if (condition == 800) {
+      return WeatherIcons.day_sunny;
+    } else if (condition == 801) {
+      return WeatherIcons.day_cloudy;
+    } else if (condition == 802) {
+      return WeatherIcons.cloud;
+    } else if (condition == 803 || condition == 804) {
+      return WeatherIcons.cloudy;
+    } else {
+      return WeatherIcons
+          .alien; // Ikon default untuk kondisi yang tidak dikenal
+    }
   }
 
   Widget saleSummary() {

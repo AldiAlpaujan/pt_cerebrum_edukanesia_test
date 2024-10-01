@@ -5,6 +5,7 @@ import 'package:aldi_test/services/sql/sql_helper.dart';
 import 'package:aldi_test/services/sql/sql_service.dart';
 import 'package:aldi_test/widget/app_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -66,6 +67,14 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   }
 
   initialize() async {
+    LocationPermission permission;
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Izin lokasi ditolak');
+      }
+    }
     await SharedPref.loadUser();
     final isFirstTime = await SharedPref.loadFirsTimeUser();
     if (isFirstTime) await initializationData();
